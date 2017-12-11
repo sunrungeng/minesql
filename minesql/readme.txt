@@ -39,3 +39,4 @@
         help table tablename;
 6 退出
     exit
+    d
