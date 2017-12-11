@@ -1,0 +1,4 @@
+﻿Welcome to minesql!
+Please login first!
+form:
+    minesql -u username -p password
