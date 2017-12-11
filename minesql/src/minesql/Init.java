@@ -15,7 +15,6 @@ public class Init {
     public static void main(String[] args) {
 //        FileWriter fw = null;
 //        try {
-//            fw = new FileWriter(new File("user.txt"));
 //            Scanner sc = new Scanner(System.in);
 //
 //            String str = "";

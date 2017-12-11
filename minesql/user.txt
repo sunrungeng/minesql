@@ -1,5 +1,0 @@
-username password
-admin admin
-root root
-user user
-srg srg
