@@ -68,7 +68,6 @@ public class UserController{
                     }
                 }
             }
-            scanner.close();
             fin.close();
             in.close();
             return user;
@@ -111,6 +110,12 @@ public class UserController{
             Cell cell3 = row.createCell(2);
             Cell cell4 = row.createCell(3);
             Cell cell5 = row.createCell(4);
+
+            cell1.setCellType(CellType.STRING);
+            cell2.setCellType(CellType.STRING);
+            cell3.setCellType(CellType.STRING);
+            cell4.setCellType(CellType.STRING);
+            cell5.setCellType(CellType.STRING);
 
             //创建用户默认拥有insert,delete,update,select权限
             String privileges = "insert,delete,update,select";
@@ -304,6 +309,43 @@ public class UserController{
             fos.close();
             fis.close();
             in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showUsers() {
+        File file = new File("user.xls");
+        try {
+            InputStream in = new FileInputStream(file);
+            POIFSFileSystem fin = new POIFSFileSystem(in);
+            HSSFWorkbook workbook = new HSSFWorkbook(fin);
+            HSSFSheet sheet = workbook.getSheetAt(0);
+            List<List<String>> rowData = new ArrayList<>();
+            List<String> columnName = new ArrayList<>();
+            columnName.add("id");
+            columnName.add("username");
+            columnName.add("role");
+            columnName.add("privilege");
+
+            for(int i = 1;i <= sheet.getLastRowNum();i++){
+                HSSFRow row = sheet.getRow(i);
+                HSSFCell cell1 = row.getCell(0);
+                HSSFCell cell2 = row.getCell(1);
+                HSSFCell cell3 = row.getCell(3);
+                HSSFCell cell4 = row.getCell(4);
+                List<String> temp = new ArrayList<>();
+                cell1.setCellType(CellType.STRING);
+                temp.add(cell1.getStringCellValue());
+                temp.add(cell2.getStringCellValue());
+                temp.add(cell3.getStringCellValue());
+                temp.add(cell4.getStringCellValue());
+                rowData.add(temp);
+            }
+
+            TableController.printTable("users",rowData,columnName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -13,6 +13,8 @@
         revoke privilege from username;
     3.3 设置管理员:
         set user username manager;
+    3.4 查看所有用户:
+        show users;
 4 数据库管理:
     4.1 创建数据库:
         create database databasename;
@@ -37,6 +39,21 @@
         select [*],[columnname1,columnname2] from tablename [where a = b];
     5.7 查看表结构
         help table tablename;
-6 退出
+6 视图管理:
+    6.1 创建:
+        create view viewName as select sno from student;
+    6.2 删除:
+        drop view viewName;
+    6.3 查看视图信息:
+        help view viewName;
+    6.4 查看视图内容:
+        select * from view viewName;
+7 索引管理:
+    7.1 创建:
+        create index unique indexName on tableName ... ;
+    7.2 删除:
+        drop index indexName;
+    7.3 查看索引信息:
+        help index indexName;
+8 退出
     exit
-    d

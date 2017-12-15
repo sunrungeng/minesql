@@ -1,32 +1,14 @@
-StringUtils:
-    equalsIgnoreCase 忽视大小写的比较
-    equalsUpperOrLower 大写或小写的比较
-    containsString(string int(1,2)) 1忽视大小写的包含,2大写或小写的包含
-    ...改到已有的代码中去
-    (作废)将所有语句改为小写即可，sql语句中不分大小写,虽然查询等的时候列名不分大小写，但是存储的时候还是要分的
-
 table:
     create: 后面的句子解析，判错
         foreign key: 创建的时候查询是否正确
-    insert: 增加数据的时候注意 primary key, foreign key, check, unique, not null/null 还有select之后的 违反需要报出具体的错误
+    insert: 增加数据的时候注意foreign key, 还有select之后的 违反需要报出具体的错误
     delete:
-    update:
+    update: 增加数据的时候注意 primary key, foreign key, check, unique, not null/null 还有select之后的 违反需要报出具体的错误
     select:
         单表 连接 嵌套 集合
-        where支持and or between and in like
-        order by
-        desc asc
+        where支持 or between and in
 index:
     create:
-
-user:
-    权限管理
-
-database:
-    drop:
-
-parseSqlUtil:
-    解析字符串，用正则匹配，检查sql语句中的语法错误和语义错误，报错并打印
 
 view:
     create:
@@ -34,6 +16,5 @@ view:
 
 help:
     database: 输出所有数据表、视图和索引的信息，同时显示其对象类型
-    table + 表名: 输出数据表中所有属性的详细信息
     view + 视图名: 输出视图的定义语句
     index + 索引名: 输出索引的详细信息

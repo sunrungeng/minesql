@@ -128,10 +128,14 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/resource/jsqlparser-0.9.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/resource/jsqlparser-0.9.6-SNAPSHOT.jar!/" />
         </CLASSES>
-        <JAVADOC />
-        <SOURCES />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/src/resource/jsqlparser-0.9.5-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/src/resource/jsqlparser-0.9.5-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>

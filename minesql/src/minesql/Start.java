@@ -1,10 +1,9 @@
 package minesql;
 
 import minesql.common.Const;
-import minesql.controller.DatabaseController;
-import minesql.controller.TableController;
-import minesql.controller.UserController;
+import minesql.controller.*;
 import minesql.pojo.User;
+import minesql.pojo.View;
 import minesql.util.StringUtils;
 
 import java.io.*;
@@ -21,13 +20,13 @@ public class Start {
 
     public static void main(String[] args) {
         Start start = new Start();
-
         //welcome
         start.welcome();
         UserController userController = new UserController();
         DatabaseController databaseController = new DatabaseController();
         TableController tableController = new TableController();
-
+        ViewController viewController = new ViewController();
+        IndexController indexController = new IndexController();
         //login
         User user = userController.login();
 
@@ -54,8 +53,20 @@ public class Start {
                     databaseController.showDatabases();
                 } else if (StringUtils.equalsIgnoreCase(str,"show tables")) {
                     tableController.showTables(databaseName);
-                } else if (str.contains("help table")){
-                    tableController.helpTable(databaseName,str);
+                } else if (StringUtils.equalsIgnoreCase(str,"show users")){
+                    userController.showUsers();
+                } else if (str.startsWith("help")){
+                    if(str.startsWith("help table")){
+                        tableController.helpTable(databaseName,str);
+                    } else if (str.equals("help database")){
+                        databaseController.helpDatabase();
+                    } else if (str.startsWith("help view")){
+                        viewController.helpView(databaseName,str);
+                    } else if (str.startsWith("help index")){
+                        indexController.helpIndex(databaseName,str);
+                    } else{
+                        System.out.println(Const.Error.SQL_SYNTAX_ERROR);
+                    }
                 } else if (str.contains("grant")){
                     userController.grant(user,str);
                 } else if (str.contains("revoke")){
@@ -70,19 +81,22 @@ public class Start {
                     } else if (StringUtils.containsString(str,"user")) {
                         userController.createUser(user,str);
                     } else if (StringUtils.containsString(str,"view")) {
-
+                        viewController.createView(user,databaseName,str);
                     } else if (StringUtils.containsString(str,"index")) {
-
+                        indexController.createIndex(user,databaseName,str);
                     } else {
                         System.out.println(Const.Error.SQL_SYNTAX_ERROR);
-
                     }
                 } else if (StringUtils.containsString(str,"select")) {
-                    tableController.selectTableData(user,databaseName,str);
+                    if(str.contains("view")){
+                        viewController.select(user,databaseName,str);
+                    }else{
+                        tableController.select(user,databaseName,str);
+                    }
                 } else if (StringUtils.containsString(str,"insert")) {
                     tableController.insertTableData(user,databaseName, str);
                 } else if (StringUtils.containsString(str,"delete")) {
-                    tableController.deleteTableData1(user,databaseName,str);
+                    tableController.deleteTableData(user,databaseName,str);
                 } else if (StringUtils.containsString(str,"update")){
                     tableController.updateTableData(user,databaseName,str);
                 } else if (StringUtils.containsString(str,"drop")) {
@@ -91,9 +105,9 @@ public class Start {
                     } else if (StringUtils.containsString(str,"database")) {
                     databaseController.dropDatabase(user,str);
                     } else if (StringUtils.containsString(str,"view")) {
-
+                    viewController.dropView(user,databaseName,str);
                     } else if (StringUtils.containsString(str,"index")) {
-
+                    indexController.dropIndex(user,databaseName,str);
                     } else {
                         System.out.println(Const.Error.SQL_SYNTAX_ERROR);
                     }
